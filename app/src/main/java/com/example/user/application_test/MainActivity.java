@@ -1,8 +1,10 @@
 package com.example.user.application_test;
 
 import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 int result = number1 + number2;
 
                 resultTextView.setText(result + "");
+
+                /* Hide number pad or key pad after the button is pressed
+                ref: https://www.android-examples.com/hide-edittext-soft-keyboard-on-android-programmatically-on-button-click/
+                 */
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(firstNumEditText.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(secondNumEditText.getWindowToken(), 0);
             }
         });
     }
