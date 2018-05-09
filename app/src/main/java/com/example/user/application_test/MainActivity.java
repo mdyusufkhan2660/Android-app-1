@@ -3,11 +3,13 @@ package com.example.user.application_test;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import static java.sql.Types.NULL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,12 +27,30 @@ public class MainActivity extends AppCompatActivity {
                 EditText secondNumEditText = (EditText) findViewById(R.id.secondNumEditText);
                 TextView resultTextView = (TextView) findViewById(R.id.resultTextView);
 
-                int number1 = Integer.parseInt(firstNumEditText.getText().toString());
-                int number2 = Integer.parseInt(secondNumEditText.getText().toString());
-                int result = number1 + number2;
+                String num1Str,num2Str;
+                long number1,number2,result;
 
-                resultTextView.setText(result + "");
+                num1Str = firstNumEditText.getText().toString();
+                num2Str = secondNumEditText.getText().toString();
+                try{
+                    if(num1Str.isEmpty()||num2Str.isEmpty()){
+                        resultTextView.setText("Invalid input");
+                    }
 
+                    else if(TextUtils.isDigitsOnly(num1Str)&&TextUtils.isDigitsOnly(num2Str)){
+
+                        number1 = Long.parseLong(num1Str);
+                        number2 = Long.parseLong(num2Str);
+                        result = number1 + number2;
+                        resultTextView.setText(result + "");
+                    }
+                    else{
+                        resultTextView.setText("Invalid input");
+                    }
+                }
+                catch(Exception e){
+                    resultTextView.setText("Oops!");
+                }
                 /* Hide number pad or key pad after the button is pressed
                 ref: https://www.android-examples.com/hide-edittext-soft-keyboard-on-android-programmatically-on-button-click/
                  */
