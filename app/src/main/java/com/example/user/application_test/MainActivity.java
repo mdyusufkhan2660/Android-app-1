@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
                     if(num1Str.isEmpty()||num2Str.isEmpty()){
                         resultTextView.setText("Invalid input");
                     }
-
                     else if(TextUtils.isDigitsOnly(num1Str)&&TextUtils.isDigitsOnly(num2Str)){
-
                         number1 = Long.parseLong(num1Str);
                         number2 = Long.parseLong(num2Str);
                         result = number1 + number2;
